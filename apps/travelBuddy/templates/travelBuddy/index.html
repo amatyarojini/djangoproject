@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  
+  <title>Document</title>
+ </head>
+ <body>
+  <h1>Welcome!</h1>
+  {% if messages %}
+  {% for message in messages %}
+  <p>{{ message }}</p>
+  {% endfor %}
+  {% endif %}
+
+  <h2>Register</h2>
+  <form action="/main/register" method="POST">
+   {% csrf_token %}
+   <p>Name: <input type= "text" name = "name"></p>
+   <p>Username: <input type= "text" name= "username"></p>
+   <p>Password: <input type= "password" name= "password"></p>
+   <p>*Password should be atleast 8 characters</p>
+   <p>Confirm PW: <input type= "password" name= "confirmPW"></p>
+   <p><input type= "submit" value= "Register"></p><br>
+  </form>
+  <h2>Login</h2>
+  <form action="/main/login" method="POST">
+   {% csrf_token %}
+   <p>Username: <input type= "text" name= "username"></p>
+   <p>Password: <input type= "password" name= "password"></p>
+   <p><input type= "submit" value= "Login"></p>
+  </form>
+ </body>
+</html>

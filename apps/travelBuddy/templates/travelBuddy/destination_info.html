@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width", initial-scale=1.0>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+ </head>
+ <body>
+
+   <h3><a href = "/travels">Home</a></h3>
+   <h3><a href = "/main">Logout</a></h3>
+
+   <h1>{{request.GET.dest}}</h1>
+
+   <p>planned By:{{request.GET.name}}</p>
+   <p>Description:{{request.GET.plan}}</p>
+   <p>Travel Date From:{{request.GET.startdate}}</p>
+   <p>Travel Date To:{{request.GET.enddate}}</p><br><br>
+
+   <h1>Other users joining the trip</h1>
+   {% for other in other_users %}
+    <p>{{other.name}}</p>
+   {% endfor %}
+
+ </body>
+</html>

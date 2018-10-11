@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+  function validateDate() {
+    var selectStartDate = document.getElementById("fromDate").value;
+    var selectEndDate = document.getElementById("toDate").value;
+    var todayDate = new Date();
+    if (Date.parse(selectStartDate) < Date.parse(todayDate) ){
+	   alert ("Start Date must be greater than today");
+    }
+
+    if (Date.parse(selectEndDate) < Date.parse(selectStartDate) ){
+	   alert ("End Date must be greater than start date");
+    }
+
+
+	  }
+  </script>
+  </head>
+ <body>
+  <h2><a href = "/travels">Home</a></h2>
+  <h2><a href = "/main">Logout</a></h2>
+  <h1>Add a Trip</h1>
+  <form action="/travels/addProcess" method="POST">
+   {% csrf_token %}
+   <p>Destination: <input type= "text" name = "dest" ></p>
+   <p>Description: <input type= "text" name= "desc"></p>
+   <p>Travel Date From: <input type= "date" onchange="validateDate()" id="fromDate" name= "fromDate" ></p>
+   <p>Travel Date To: <input type= "date" name= "toDate"  onchange="validateDate()" id="toDate"></p>
+
+
+   <p><input type= "submit" value= "Add"></p><br>
+  </form>
+
+
+
+ </body>
+</html>

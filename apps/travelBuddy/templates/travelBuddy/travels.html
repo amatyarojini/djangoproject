@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width", initial-scale=1.0>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+ </head>
+ <body>
+
+    <h1>Hello,{{request.session.username}}!</h1>
+
+
+   <h2><a href = "/main">Logout</a></h2>
+   <h3>Your trip schedules</h3>
+
+
+     <table style="width:80%" border="1">
+      <tr>
+
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Plan</th>
+      </tr>
+       {% for trip in all_trips %}
+        {% for user in trip.users.all %}
+           {% if user.id == request.session.id %}
+       <td><a class="btn-link" href= "/travels/destination/{{request.session.id}}?dest={{trip.destination}} &plan={{trip.plan}} &startdate={{trip.startdate}} &enddate={{trip.enddate}}  &name={{user.username}} &trip_id={{trip.id}} " >{{trip.destination}}</a></td>
+       <td>{{trip.startdate}}</td>
+       <td>{{trip.enddate}}</td>
+       <td>{{trip.plan}}</td>
+      </tr>
+
+
+       {% endif %}
+     {% endfor %}
+  {% endfor %}
+     </table>
+
+
+
+   <h3>other user's travel plan</h3>
+
+
+          <table style="width:80%" border="1">
+           <tr>
+             <th>Name</th>
+             <th>Destination</th>
+             <th>Travel Start Date</th>
+             <th>Travel End Date</th>
+             <th>Do you want to join ?</th>
+           </tr>
+           {% for trip in trip_two %}
+            {% for user in trip.users.all %}
+                {% if user.id != request.session.id %}
+           <tr>
+             <td>{{user.name}}</td>
+            <td><a href= "/travels/destination/{{user.id}}?name={{user.name}} &startdate={{trip.startdate}} &enddate={{trip.enddate}} &plan={{trip.plan}} &trip_id={{trip.id}}" >{{trip.destination}}</a></td>
+
+            <td>{{trip.startdate}}</td>
+            <td>{{trip.enddate}}</td>
+            <td><a herf = "">Join</a></td>
+           </tr>
+           {% endif %}
+         {% endfor %}
+      {% endfor %}
+
+         </table>
+
+   <h2><a href = "/travels/add">Add Travel Plan</a></h2>
+ </body>
+</html>
